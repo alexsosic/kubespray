@@ -1,0 +1,10 @@
+- hosts: kube-master[0]
+  gather_facts: false
+  tasks:
+    - name: Getting admin.conf kubeconfig
+      fetch:
+        src: /etc/kubernetes/admin.conf
+        dest: "secrets/kubeconfig/admin.conf"
+        flat: yes
+
+    

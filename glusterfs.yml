@@ -1,0 +1,9 @@
+- name: GlusterFS
+  hosts:
+    - k8s-cluster
+    - glusterfs
+  become: true
+  tags:
+    - glusterfs
+  roles:
+    - glusterfs

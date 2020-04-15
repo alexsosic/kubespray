@@ -1,0 +1,15 @@
+replicaCount: 1
+image: docker.elastic.co/kibana/kibana-oss
+imageTag: 7.6.1
+elasticsearchHosts: http://elasticsearch-master:9200
+resources:
+  requests:
+    cpu: 20m
+    memory: 200Mi
+  limits:
+    cpu: 100m
+    memory: 500Mi
+ingress:
+  enabled: true
+  hosts:
+  - kibana.k8.iprod.local

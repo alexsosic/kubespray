@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: chartmuseum-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - host: charts.k8.iprod.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: chartmuseum-chartmuseum
+          servicePort: 8080

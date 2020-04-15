@@ -1,0 +1,9 @@
+controller:
+  kind: DaemonSet
+  config:
+    enable-vts-status: "false"
+    proxy-connect-timeout: "60s"
+    proxy-read-timeout: "60s"
+    proxy-body-size: "512m"
+    client-max-body-size: "512m"
+  hostNetwork: true

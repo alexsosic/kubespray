@@ -1,0 +1,38 @@
+global:
+  rbac:
+    create: true
+alertmanager:
+  alertmanagerSpec:
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-glusterfs
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+  ingress:
+    enabled: true
+    hosts:
+    - alertmanager.k8.iprod.local
+prometheus:
+  prometheusSpec:
+    retention: 30d
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: openebs-glusterfs
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+  ingress:
+    enabled: true
+    hosts:
+    - prometheus.k8.mmi.local
+grafana:
+  adminPassword: admin
+  ingress:
+    enabled: true
+    hosts:
+    - grafana.k8.iprod.local

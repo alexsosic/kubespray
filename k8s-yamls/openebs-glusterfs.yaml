@@ -1,0 +1,11 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    cas.openebs.io/config: "- name: StorageType\n  value: \"hostpath\"\n- name: BasePath\n
+      \ value: /data \n"
+    openebs.io/cas-type: local
+  name: openebs-glusterfs
+provisioner: openebs.io/local
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer

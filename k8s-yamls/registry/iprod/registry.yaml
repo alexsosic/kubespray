@@ -1,0 +1,82 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: registry-data-claim
+spec:
+  storageClassName: openebs-glusterfs
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5G
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: registry
+spec:
+  selector:
+    matchLabels:
+      app: registry
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - image: registry:2
+        name: registry
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 10m
+            memory: 128Mi
+        env:
+        - name: "REGISTRY_STORAGE_DELETE_ENABLED"
+          value: "1"
+        volumeMounts:
+          - mountPath: /var/lib/registry
+            name: registry-data
+      volumes:
+        - name: registry-data
+          persistentVolumeClaim:
+            claimName: registry-data-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  name: registry-service
+spec:
+  type: ClusterIP
+  sessionAffinity: None
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app: registry
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: registry-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.org/client-max-body-size: "512m"
+    nginx.org/proxy-body-size: "512m"
+spec:
+  rules:
+  - host: registry.k8.iprod.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: registry-service
+          servicePort: 8080

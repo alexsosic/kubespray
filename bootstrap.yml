@@ -1,0 +1,5 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: Install bootstrap packages
+    raw: "apt -y update && apt install -y sudo python-minimal python-setuptools"

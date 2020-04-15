@@ -1,0 +1,17 @@
+esJavaOpts: -Xmx512m -Xms512m
+imageTag: "7.6.0"
+persistence:
+  enabled: true
+volumeClaimTemplate:
+  storageClassName: openebs-hostpath
+  accessModes: ["ReadWriteOnce"]
+  resources:
+    requests:
+      storage: 10Gi
+resources:
+  requests:
+    cpu: "1000m"
+    memory: "2Gi"
+  limits:
+    cpu: "1000m"
+    memory: "2Gi"
