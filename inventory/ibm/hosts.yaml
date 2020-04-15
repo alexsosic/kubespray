@@ -3,28 +3,28 @@ all:
     k8s01:
       ansible_host: 159.122.111.56
       ansible_user: root
-      ip: 159.122.111.56
-      access_ip: 159.122.111.56
+      ip: 10.135.107.69
+      access_ip: 10.135.107.69
     k8s02:
       ansible_host: 159.122.111.53
       ansible_user: root
-      ip: 159.122.111.53
-      access_ip: 159.122.111.53
+      ip: 10.135.107.124
+      access_ip: 10.135.107.124
     k8s03:
       ansible_host: 159.122.111.51
       ansible_user: root
-      ip: 159.122.111.51
-      access_ip: 159.122.111.51
+      ip: 10.135.107.100
+      access_ip: 10.135.107.100
     k8s04:
       ansible_host: 159.122.111.55
       ansible_user: root
-      ip: 159.122.111.55
-      access_ip: 159.122.111.55
+      ip: 10.135.107.117
+      access_ip: 10.135.107.117
     k8s05:
       ansible_host: 159.122.111.54
       ansible_user: root
-      ip: 159.122.111.54
-      access_ip: 159.122.111.54
+      ip: 10.135.107.108
+      access_ip: 10.135.107.108
   children:
     kube-master:
       hosts:
